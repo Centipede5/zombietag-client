@@ -1,0 +1,268 @@
+<head>
+<meta charset="utf-8">
+<script src="render.js"></script>
+<script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+<title>Zombietag.io</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<style type="text/css">
+	#cards {
+		height: 100%;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	width:50%;
+	}
+	#username {
+		width: 100%;
+	    height: 45px;
+	    margin-bottom: 10px;
+	    padding: 6px 12px;
+	    font-size: 14px;
+	    line-height: 1.42857143;
+	    float: left;
+	    color: #555;
+	    background-color: rgba(0, 0, 0, 0.07);
+	    border: none;
+	    border-radius: 4px;
+	    box-shadow: none;
+	}
+	#title {
+		font-size: 26px;
+    	margin: 0;
+    	padding: 10px;
+    	margin:10px;
+	}
+	#spectate, #settings{
+		height: 35px;
+    	line-height: 2.2;
+    	width: 100%;
+	}
+	#play{
+		background-color: #6a62fb;
+		width: 100%;
+	}
+	.zoom {
+		-webkit-transition: transform .2s ease-in-out;
+    	-moz-transition: transform .2s ease-in-out;
+    	transition: transform .2s ease-in-out;
+	}
+	.zoom:hover {
+		z-index: 500;
+  		transform: scale(1.02); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+	}
+	.zoom2 {
+		-webkit-transition: transform .2s ease-in-out;
+    	-moz-transition: transform .2s ease-in-out;
+    	transition: transform .2s ease-in-out;
+	}
+	.zoom2:hover {
+		z-index: 500;
+  		transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+	}
+	#gameTitle {
+		text-align: center;
+    	font-size: 18pt;
+    	margin: 5px;
+    	margin-top: -5px;
+    	margin-bottom: 15px;
+	}
+	.social {
+		font-size:30px;
+	}
+	.links a {
+		color: black;
+		font-weight: bold;
+    	text-decoration: none;
+	}
+</style>
+</head>
+<body>
+<div id="signDiv" style="display:block;">
+	<div class="h-100 row align-items-center">
+	  <div id="cards" class="col" style="">
+	    <div class="row" style="width:60%;">
+	    	<div class="col p-1">
+	    		<div class="container rounded border bg-light">
+	    			<h4 class="gameTitle p-2" style="text-align:center;">Servers</h4>
+	    			<select id="serverselect" class="form-control">
+	    				
+	    			</select>
+	    			<i id="ccucount" style="font-size:12px;"></i>
+	    			<button id="inviter" disabled onclick="InviteFriends()" class="zoom btn btn-warning btn-block" style="margin:.5rem 0rem;">Invite friends</button>
+	    			<button onclick="" class="zoom btn btn-secondary btn-block" disabled style="margin:.5rem 0rem;">Host game (coming soon)</button>
+	    		</div>
+	    	</div>
+	    	<div class="col p-1">
+	    		<div class="container rounded border bg-light">
+	    			<h3 class="title p-3" style="text-align:center;">Zombietag.io</h3>
+		    		<input id="username" type="text" class="zoom" placeholder = "nickname">
+		    		<i style="font-size:12px;">Advertisment</i>
+		    		<div id="ad">
+		    		</div>
+		    		<button id="play" onclick="Play()" class="zoom btn btn-primary">Play</button>
+		    		<div class="row p-3" style="padding-top:5px!important;">
+		    			<div class="col p-0">
+		    				<button id="settings" data-toggle="modal" data-target="#exampleModal" class="zoom btn btn-secondary p-0">Privacy</button>
+		    			</div>
+		    			<div class="col p-0">
+		    				<button id="spectate" onclick = "alert('please send email to centipede5dev@gmail.com with questions or ideas')" class="zoom btn btn-warning p-0">Contact</button>
+		    			</div>
+		    		</div>
+	    		</div>
+	    		<div class="container rounded border bg-light" style="margin-top:5px;">
+	    			<div class="row m-2" style="text-align:center;">
+						<a href="https://twitter.com/Centipede5dev" target="_blank" class="col social zoom2" style="color:#1DA1F2">
+							<i class="fab fa-twitter-square"></i>
+						</a>
+						<a href="https://www.youtube.com/channel/UCMiHeRSOcSOSWR-2gaZIMCw?sub_confirmation=1" target="_blank" class="col social zoom2" style="color:#FF0000">
+							<i class="fab fa-youtube"></i>
+						</a>
+						<a href="https://discord.gg/CedvvPK" target="_blank" class="col social zoom2" style="color:#738ADB">
+							<i class="fab fa-discord"></i>
+						</a>
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="col p-1">
+	    		<div class="rounded border bg-light container">
+	    			<h4 class="gameTitle p-2" style="text-align:center;">Skins</h4>
+	    			<h5 class="p-3" style="color:grey;text-align:center;">Coming Soon!</h5>
+	    		</div>
+	    	</div>
+	    </div>
+	  </div>
+	</div>
+	<div style="position:absolute;z-index:5;bottom:0px;left:0px;text-align: center; width: auto;" class="p-2 links rounded border bg-light container">
+		<a target="_blank" href="https://crazygames.com/c/io">Crazygames</a>|
+		<a target="_blank" href="https://iogames.space">More io games</a>|
+		<a target="_blank" href="https://insanegames.io/">Unblocked games</a>|
+		<a target="_blank" href="https://titotu.io">Titotu</a>|
+		<a target="_blank" href="https://silvergames.com/en/iogames">Silvergames</a>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Privacy policy and changelog</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <pre class="modal-body" style="font-size:12px;">
+PRIVACY POLICY:
+
+Welcome to zombietag.io. If you continue to browse and use this website you consent to our privacy policy.
+
+Third Parties:
+> Third parties may be placing and reading cookies on your browser, or using web beacons to collect information as a result of ad serving on this site
+
+For More information on Third Parties Go here: http://www.google.com/policies/privacy/partners/
+
+Certain analytics and advertising tools on our site may also collect information about:
+> Your General Location (Country, City)
+> The amount of time you spend on this site
+> The website that you came from
+> IP Address
+> Battery information
+> Connection information
+> Browser information
+
+What do we use the Information for?
+> The information is used to protect your account and make it possible for you to
+  recover it in case you lose the details. Some information is also collected to personalize
+  your experience.
+> Information is also collected to analyze user data and enhance the user experience.
+
+Do we discuss or trade your information with outside parties?
+> No. All of the information you provide us will be kept private.
+> No information is sold to any outside parties.
+
+Do we use cookies?
+> Yes. Cookies are using the save certain information: settings, account info.
+
+Your acceptance of these terms
+> By using this Site, you signify your acceptance of this policy. If you do not agree to this policy, please do not use our Site.
+  Your continued use of the Site following the posting of changes to this policy will be deemed your acceptance of those changes.
+
+Changes to this Policy
+> Any changes to this policy will be posted on this page.
+> Last modification: 06/22/2020
+      </pre>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+<div id="gameDiv" style="display:none;">
+	<div id="leaderDiv" style="right:0px;top:0px;float:right;" class="rounded border bg-light">
+		<div class="p-2">
+			<b id="humancount" style="color:green">10 humans</b><br>
+			<b id="zombiecount" style="color:red">10 zombies</b>
+		</div>
+	</div>
+	<div style="position: fixed;right:0px;bottom:0px;float:right;" class="rounded border bg-light">
+		<div class="p-2">
+			<b>Press B to open shop</b>
+		</div>
+	</div>
+	<iframe class="rounded" style="border:none;left:0px;bottom:0px;float:left;position: fixed;width: 250px;height: 390px;" id="chatframe"></iframe>
+	<button id="toggler" onclick="toggleChat();" class="btn text-light bg-transparent" style="position:absolute;bottom:350px;left:200px;"><span id="tarrow" class="fa fa-angle-down"></span></button>
+</div>
+<script>
+	function toggleChat(){
+		if(getElem("tarrow").classList.contains("fa-angle-down")){
+			getElem("toggler").style.bottom = "10px";
+			getElem("chatframe").style.height ="50px";
+			getElem("tarrow").classList.remove("fa-angle-down")
+			getElem("tarrow").classList.add("fa-angle-up")
+		}else{
+			getElem("toggler").style.bottom = "350px";
+			getElem("chatframe").style.height ="390px";
+			getElem("tarrow").classList.remove("fa-angle-up")
+			getElem("tarrow").classList.add("fa-angle-down")
+		}
+	}
+</script>
+
+<div id="shopDiv" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Shop</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+      </div>
+      <div class="modal-body">
+      	<p id="coins"></p>
+        <table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">Item</th>
+		      <th scope="col">Image</th>
+		      <th scope="col">Cost</th>
+		      <th scope="col"></th>
+		    </tr>
+		  </thead>
+		  <tbody id="items">
+		  </tbody>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
