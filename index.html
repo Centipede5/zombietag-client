@@ -283,29 +283,37 @@ Changes to this Policy
   </div>
 </div>
 <script>
-	// cpmstarAPI({kind: "go", module: "anchor"});
-	var el = document.createElement("div"); el.id = "POOL 83775";
-	function resizeAd(){
-		console.log("resized ad")
-		var originwidth = document.querySelector("#cards > div > div:nth-child(2)").clientWidth;
-		document.getElementById("ad").style.transform ='scale('+0.9*document.querySelector("#cards > div > div:nth-child(2)").clientWidth/300+')'
-		document.getElementById("ad").style.margin=-1*(300-originwidth)+'px'
+	function adblock(){
+    	var xhttp = new XMLHttpRequest ();
+	    xhttp.onreadystatechange = function () {
+	
+	        if (this.readyState === 4 && this.status === 0)
+	            showBrave();
+	        if(this.readyState ===4 && this.status ===200)
+	            showAds();
+	    }
+	    xhttp.open ("GET", "https://api.adinplay.com/libs/aiptag/assets/adsbygoogle.js", true);
+	    xhttp.send ();
 	}
-	resizeAd();
-	// window.addEventListener("resize",resizeAd);
-	
-	document.getElementById("ad").appendChild(el);
-	cpmstarAPI({kind:'asynctagfetch',el:el,pid:83775});
-	
-	cpmstarAPI({
-		kind:"game.createInterstitial",
-		onAdOpened: function(){
-		console.log("Interstitial opened");
-		},
-		onAdClosed: function(){
-		console.log("Interstitial closed");
+	function showBrave(){
+		
+	}
+	function showAds(){
+		var el = document.createElement("div"); el.id = "POOL 83775";
+		function resizeAd(){
+			console.log("resized ad")
+			var originwidth = document.querySelector("#cards > div > div:nth-child(2)").clientWidth;
+			document.getElementById("ad").style.transform ='scale('+0.9*document.querySelector("#cards > div > div:nth-child(2)").clientWidth/300+')'
+			document.getElementById("ad").style.margin=-1*(300-originwidth)+'px'
 		}
-	});
+		resizeAd();
+		// window.addEventListener("resize",resizeAd);
+		
+		document.getElementById("ad").appendChild(el);
+		cpmstarAPI({kind:'asynctagfetch',el:el,pid:83775});
+	}
+	adblock();
+	//https://brave.com/zom920
 </script>
 <script src="main.js"></script>
 </body>
