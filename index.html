@@ -290,13 +290,15 @@ Changes to this Policy
 	        if (this.readyState === 4 && this.status === 0)
 	            showBrave();
 	        if(this.readyState ===4 && this.status ===200)
-	            showAds();
+	            showBrave()//showAds();
 	    }
 	    xhttp.open ("GET", "https://api.adinplay.com/libs/aiptag/assets/adsbygoogle.js", true);
 	    xhttp.send ();
 	}
 	function showBrave(){
-		
+		var el = document.createElement("div");
+		el.innerHTML=`<a target="_blank" href="https://brave.com/zom920"><img src="media/336x280-standard.png" width="300" height="250"></a>`
+		document.getElementById("ad").appendChild(el);
 	}
 	function showAds(){
 		var el = document.createElement("div"); el.id = "POOL 83775";
