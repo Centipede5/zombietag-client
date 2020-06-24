@@ -289,8 +289,14 @@ Changes to this Policy
 	
 	        if (this.readyState === 4 && this.status === 0)
 	            showBrave();
-	        if(this.readyState ===4 && this.status ===200)
-	            showAds();
+	        if(this.readyState ===4 && this.status ===200){
+	        	if(Math.random()<0.01){
+	        		showBrave();
+	        	}else{
+	        		showAds();
+	        	}
+	        }
+	            
 	    }
 	    xhttp.open ("GET", "https://api.adinplay.com/libs/aiptag/assets/adsbygoogle.js", true);
 	    xhttp.send ();
