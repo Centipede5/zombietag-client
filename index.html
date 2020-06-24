@@ -8,6 +8,24 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Online instructions at: https://docs.google.com/document/d/e/2PACX-1vSCcPp_J5PRBeanzdKAnV5g6FXKFJgTTrlbLZDYo16sJuNH04SEYuc6LlR8R-UMHbnFJh1XpeXW1Rkj/pub -->
+<!-- ZONETAG - PLACE INTO HEAD SECTION OR RUN CODE AT STARTUP -->
+<script>
+(function(zonefile) { 
+var rnd = Math.round(Math.random()*999999);
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+var proto = document.location.protocol;
+var host = ( proto == "https:" || proto == "file:")?"https://server":"//cdn";
+if(window.location.hash=="#cpmstarDev") host = "//dev.server";
+if(window.location.hash=="#cpmstarStaging") host = "//staging.server"; 
+s.src = host + ".cpmstar.com/cached/zonefiles/" + zonefile + ".js?rnd="+rnd; 
+var s2=document.getElementsByTagName('script')[0];
+s2.parentNode.insertBefore(s, s2);
+var y=window.location.href.split('#')[0].split('').reduce(function(a,b){return(a<<5)-a+b.charCodeAt(0)>>>1},0);y=(10+((y*7)%26)).toString(36)+y.toString(36);
+var drutObj = window[y] = window[y] || {};
+window.cpmstarAPI = function(o) { (drutObj.cmd = drutObj.cmd || []).push(o); }
+}('295_48363_gameapi'));
+</script>
 
 <style type="text/css">
 	#cards {
@@ -104,7 +122,7 @@
 		    		<i style="font-size:12px;">Advertisment</i>
 		    		<div id="ad">
 		    		</div>
-		    		<button id="play" onclick="Play()" class="zoom btn btn-primary">Play</button>
+		    		<button id="play" onclick="Play()" class="zoom btn btn-primary" style="margin-top:15px;">Play</button>
 		    		<div class="row p-3" style="padding-top:5px!important;">
 		    			<div class="col p-0">
 		    				<button id="settings" data-toggle="modal" data-target="#exampleModal" class="zoom btn btn-secondary p-0">Privacy</button>
@@ -264,5 +282,30 @@ Changes to this Policy
     </div>
   </div>
 </div>
+<script>
+	// cpmstarAPI({kind: "go", module: "anchor"});
+	var el = document.createElement("div"); el.id = "POOL 83775";
+	function resizeAd(){
+		console.log("resized ad")
+		var originwidth = document.querySelector("#cards > div > div:nth-child(2)").clientWidth;
+		document.getElementById("ad").style.transform ='scale('+0.9*document.querySelector("#cards > div > div:nth-child(2)").clientWidth/300+')'
+		document.getElementById("ad").style.margin=-1*(300-originwidth)+'px'
+	}
+	resizeAd();
+	// window.addEventListener("resize",resizeAd);
+	
+	document.getElementById("ad").appendChild(el);
+	cpmstarAPI({kind:'asynctagfetch',el:el,pid:83775});
+	
+	cpmstarAPI({
+		kind:"game.createInterstitial",
+		onAdOpened: function(){
+		console.log("Interstitial opened");
+		},
+		onAdClosed: function(){
+		console.log("Interstitial closed");
+		}
+	});
+</script>
 <script src="main.js"></script>
 </body>

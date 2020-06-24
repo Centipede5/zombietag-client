@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: zombietag.io
+Token: df52d50f5caabafdbae0c0a57e496a30dfcffdc16b2832acb279a0f6497faedc
