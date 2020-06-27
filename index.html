@@ -291,47 +291,6 @@ Changes to this Policy
 	<iframe class="rounded" style="border:none;left:0px;bottom:0px;float:left;position: fixed;width: 250px;height: 390px;" id="chatframe"></iframe>
 	<button id="toggler" onclick="toggleChat();" class="btn text-light bg-transparent" style="position:absolute;bottom:350px;left:200px;"><span id="tarrow" class="fa fa-angle-down"></span></button>
 </div>
-<!-- BEGIN CPMSTAR ANCHOR AD CODE -->
-<script type="text/javascript">
-if(window.innerHeight>=700){
-    var cpmstar_anchorad_settings = {
-        poolid: 79071, //Pool ID assigned by CPMStar
-        dir: 2
-        };
-
-    (function (d, t, s) { t = d.createElement('script'); t.type = 'text/javascript'; t.src = (d.location.protocol == 'https:'?'//server':'//cdn') + '.cpmstar.com/cached/js/anchorad_v100.pack.js'; t.async = true; s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(t, s); })(document, {}, {});
-	document.getElementById("cards")
-}
-cpmstarAPI({
-	kind:"game.createInterstitial",
-	onAdOpened: function(){
-		if(Math.random()<0.3){
-			document.getElementsByClassName("bannertarget")[0].style.top="32%";
-		}
-		
-	},
-	onAdClosed: function(){
-		window.Play(true);
-	}
-});
-</script>
-<!-- END CPMSTAR ANCHOR AD CODE -->
-<script>
-
-	function toggleChat(){
-		if(getElem("tarrow").classList.contains("fa-angle-down")){
-			getElem("toggler").style.bottom = "10px";
-			getElem("chatframe").style.height ="50px";
-			getElem("tarrow").classList.remove("fa-angle-down")
-			getElem("tarrow").classList.add("fa-angle-up")
-		}else{
-			getElem("toggler").style.bottom = "350px";
-			getElem("chatframe").style.height ="390px";
-			getElem("tarrow").classList.remove("fa-angle-up")
-			getElem("tarrow").classList.add("fa-angle-down")
-		}
-	}
-</script>
 
 <div id="shopDiv" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -364,46 +323,5 @@ cpmstarAPI({
     </div>
   </div>
 </div>
-<script>
-	function adblock(){
-    	var xhttp = new XMLHttpRequest ();
-	    xhttp.onreadystatechange = function () {
-	
-	        if (this.readyState === 4 && this.status === 0)
-	            showBrave();
-	        if(this.readyState ===4 && this.status ===200){
-	        	if(Math.random()<0.01){
-	        		showBrave();
-	        	}else{
-	        		showAds();
-	        	}
-	        }
-	            
-	    }
-	    xhttp.open ("GET", "https://api.adinplay.com/libs/aiptag/assets/adsbygoogle.js", true);
-	    xhttp.send ();
-	}
-	function showBrave(){
-		var el = document.createElement("div");
-		el.innerHTML=`<a target="_blank" href="https://brave.com/zom920"><img src="media/336x280-standard.png" width="300" height="250"></a>`
-		document.getElementById("ad").appendChild(el);
-	}
-	function showAds(){
-		var el = document.createElement("div"); el.id = "POOL 83775";
-		function resizeAd(){
-			console.log("resized ad")
-			var originwidth = document.querySelector("#cards > div > div:nth-child(2)").clientWidth;
-			document.getElementById("ad").style.transform ='scale('+0.9*document.querySelector("#cards > div > div:nth-child(2)").clientWidth/300+')'
-			document.getElementById("ad").style.margin=-1*(300-originwidth)+'px'
-		}
-		resizeAd();
-		// window.addEventListener("resize",resizeAd);
-		
-		document.getElementById("ad").appendChild(el);
-		cpmstarAPI({kind:'asynctagfetch',el:el,pid:83775});
-	}
-	adblock();
-	//https://brave.com/zom920
-</script>
 <script src="main.js"></script>
 </body>
